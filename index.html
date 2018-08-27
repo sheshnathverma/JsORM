@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="./class-generator.js"></script>
+    <script>
+        function convert() {
+            let val = document.getElementById('input').value;
+            if (val && val.trim()) {
+                try {
+                    debugger;
+                    var a = JSON.parse(val);
+                    document.getElementById('output').value = generate(a);
+                }
+                catch (e) {
+                    document.getElementById('output').value = JSON.stringify(e);
+                }
+
+            }
+            else {
+                document.getElementById('output').value = "";
+
+            }
+        }
+    </script>
+</head>
+<body>
+    <textarea id="input" style="width:100%;" rows="20"></textarea>
+    <hr />
+    <div style="text-align:center;">
+        <button type="button" onclick="convert()">convert</button>
+    </div>
+    <hr />
+    <textarea id="output" style="width:100%;" rows="50"></textarea>
+</body>
+</html>

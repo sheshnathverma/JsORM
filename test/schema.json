@@ -1,0 +1,34 @@
+[{
+    "class": "Employee",
+    "fields": [
+        {
+            "name": "Name",
+            "type": "string"
+        },
+        {
+            "name": "DOB",
+            "type": "Date",
+            "readonly": true
+        },
+        {
+            "name": "ManagerGUID",
+            "type": "string",
+            "entityName": "Manager",
+            "entityType": "Employee"
+        }
+    ]
+},
+{
+    "class": "Department",
+    "fields": [
+        {
+            "name": "Name",
+            "type": "string"
+        },
+        {
+            "name": "Employees",
+            "type": "Employee",
+            "isArray": true
+        }
+    ]
+}]
