@@ -9,8 +9,9 @@ function generate(schema) {
             }
 
             if (!field.entityName && !field.isArray && !field.readonly) {
-                newLines.push('        set {0}(value) { this.Set("{0}", value); }'
-                    .replace(/\{0\}/g, field.name))
+                newLines.push('        set {0}(value:{1}) { this.Set("{0}", value); }'
+                    .replace(/\{0\}/g, field.name)
+                    .replace(/\{1\}/g, field.type))
             }
 
             if (field.isArray) {
@@ -63,8 +64,8 @@ function generate(schema) {
 
             Object
                 .keys({0}Field)
-                .filter((k) => !isNaN(Number(k)))
-                .map((k) => [{0}Field[k], this.Json[{0}Field[k]]])
+                .filter((k: any) => !isNaN(Number(k)))
+                .map((k: any) => [{0}Field[k], this.Json[{0}Field[k]]])
                 .forEach((v) => self[v[0]] = v[1]);
 
 {1}
@@ -106,8 +107,8 @@ function generate(schema) {
 
             Object
                 .keys({0}Field)
-                .filter((k) => !isNaN(Number(k)))
-                .map((k) => [{0}Field[k], this.Json[{0}Field[k]]])
+                .filter((k: any) => !isNaN(Number(k)))
+                .map((k: any) => [{0}Field[k], this.Json[{0}Field[k]]])
                 .forEach((v) => this.Map.set(v[0], v[1]));
 
 {1}
@@ -170,5 +171,5 @@ function generate(schema) {
             .replace(/\{1\}/g, schema.fields.filter(function (f) { return (!f.isArray); }).map(function (f) { return f.name }).join(",\n        "));
     }
 
-    return [schema.namespace ? 'export namespace ' + schema.namespace + '{' : '', getEnum(schema), getClass(schema), schema.namespace ? '}' : ''].join('\n\n');
+    return [getEnum(schema), getClass(schema)].join('\n\n');
 }

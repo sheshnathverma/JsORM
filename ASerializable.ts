@@ -63,3 +63,4 @@ export abstract class ASerializable implements ISerializable {
         return target;
     }
 }
+
