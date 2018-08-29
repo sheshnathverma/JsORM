@@ -1,34 +1,63 @@
-[{
-    "class": "Employee",
+[
+  {
+    "name": "Employee",
     "fields": [
-        {
-            "name": "Name",
-            "type": "string"
-        },
-        {
-            "name": "DOB",
-            "type": "Date",
-            "readonly": true
-        },
-        {
-            "name": "ManagerGUID",
-            "type": "string",
-            "entityName": "Manager",
-            "entityType": "Employee"
-        }
+      {
+        "name": "Name",
+        "type": "string"
+      },
+      {
+        "name": "DOB",
+        "type": "date"
+      },
+      {
+        "name": "ManagerGUID",
+        "type": "object",
+        "object_name": "Manager",
+        "object_type": "Employee",
+        "is_fk": true
+      },
+      {
+        "name": "DepartmentGUID",
+        "type": "object",
+        "object_name": "Department",
+        "object_type": "Department",
+        "is_fk": true
+      },
+      {
+        "name": "Clients",
+        "type": "array",
+        "object_type": "Employee",
+        "is_fk": true
+      }
     ]
-},
-{
-    "class": "Department",
+  },
+  {
+    "name": "Department",
     "fields": [
-        {
-            "name": "Name",
-            "type": "string"
-        },
-        {
-            "name": "Employees",
-            "type": "Employee",
-            "isArray": true
-        }
+      {
+        "name": "Name",
+        "type": "string"
+      },
+      {
+        "name": "Employees",
+        "type": "array",
+        "object_type": "Employee",
+        "is_fk": true
+      },
+      {
+        "name": "HigherDepartmentGUID",
+        "type": "object",
+        "object_name": "HigherDepartment",
+        "object_type": "Department",
+        "is_fk": true
+      },
+      {
+        "name": "SubDepartments",
+        "type": "array",
+        "object_type": "Department",
+        "is_fk": true
+      }
     ]
-}]
+  }
+]

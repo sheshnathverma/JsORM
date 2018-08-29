@@ -2,25 +2,68 @@
 <html>
 <head>
     <title></title>
-    <script src="./class-generator.js"></script>
+    <!--<base href="./" />-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.21.3/system.js" integrity="sha256-BpGtDbQ04vwkAquy4QnHHLU/ZW66NsCeVh0NFVte07s=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.21.3/system.src.js" integrity="sha256-aCXLfJl/ujrWdb03oGbfG4eiyzKsZT8okCrmbTArXVA=" crossorigin="anonymous"></script>
     <script>
-        function convert() {
-            let val = document.getElementById('input').value;
-            if (val && val.trim()) {
-                try {
-                    debugger;
-                    var a = JSON.parse(val);
-                    document.getElementById('output').value = generate(a);
-                }
-                catch (e) {
-                    document.getElementById('output').value = JSON.stringify(e);
-                }
+        window.onload = function () {
+            //debugger;
+            //SystemJS.config({
+            //    transpiler: "plugin-typescript",
+            //    typescriptOptions: {
+            //        "target": "ES2015", // do not downlevel future ECMAScript syntax apart from decorators
+            //        "module": "commanjs" // transpile import and export statements, emitting as `System.register`
+            //    },
+            //    meta: {
+            //        "*.ts": {
+            //            "loader": "plugin-typescript"
+            //        }
+            //    }
+            //});
 
-            }
-            else {
-                document.getElementById('output').value = "";
+            SystemJS.config({
+                //transpiler: false,
+                //transpile:false,
+                //transpiler: "plugin-typescript",
+                "paths": {
 
-            }
+                },
+                baseURL: './',
+                map: {
+
+                    "ClassGenerator": './dist/src/ClassGenerator.js',
+                    "ISchema": './dist/src/ISchema.js',
+                    "Utils": './dist/src/Utils.js'
+
+                },
+                //meta: {
+                //    "*.ts": {
+                //        "loader": "plugin-typescript"
+                //    }
+                //}
+            });
+
+            SystemJS.import('ClassGenerator').then(function (m) {
+                document.getElementById('convert').addEventListener("click", convert)
+                function convert() {
+                    let val = document.getElementById('input').value;
+                    if (val && val.trim()) {
+                        try {
+
+                            var a = JSON.parse(val);
+                            document.getElementById('output').value = m.Generator.Generate(a);
+                        }
+                        catch (e) {
+                            document.getElementById('output').value = JSON.stringify(e);
+                        }
+
+                    }
+                    else {
+                        document.getElementById('output').value = "";
+
+                    }
+                }
+            });
         }
     </script>
 </head>
@@ -28,7 +71,7 @@
     <textarea id="input" style="width:100%;" rows="20"></textarea>
     <hr />
     <div style="text-align:center;">
-        <button type="button" onclick="convert()">convert</button>
+        <button type="button" id="convert">convert</button>
     </div>
     <hr />
     <textarea id="output" style="width:100%;" rows="50"></textarea>

@@ -9,4 +9,6 @@ export declare abstract class ABaseEntity extends ASerializable implements IBase
     constructor({GUID}: any);
     toJson(depth?: number): any;
     fromJson(json: any, depth?: number): void;
+    abstract Save(): Promise<ABaseEntity>;
+    abstract Delete(): Promise<ABaseEntity>;
 }

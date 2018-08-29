@@ -42,4 +42,7 @@ export abstract class ABaseEntity extends ASerializable implements IBaseEntity {
             .map((k: any) => [ABaseEntityField[k], this.Json[ABaseEntityField[k]]])
             .forEach((v) => this.Set(v[0], v[1]));
     }
+
+    abstract async Save(): Promise<ABaseEntity>;
+    abstract Delete(): Promise<ABaseEntity>;
 }
