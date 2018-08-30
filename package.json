@@ -1,0 +1,24 @@
+{
+  "name": "jsorm",
+  "version": "1.0.0",
+  "description": "thisIt will create object structure based on setup file and its mostly helpful when we need to type cast one object into another object types",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "node  dist/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sheshnathverma/JsORM.git"
+  },
+  "author": "Shesh Nath Verma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sheshnathverma/JsORM/issues"
+  },
+  "homepage": "https://github.com/sheshnathverma/JsORM#readme",
+  "devDependencies": {
+    "@types/node": "^10.9.3"
+  }
+}

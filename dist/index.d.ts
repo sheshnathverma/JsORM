@@ -1,5 +1,3 @@
-import { ISchema, Generator } from '.';
-
 export * from './serializable/ISerializable';
 export * from './serializable/ASerializable';
 export * from './base/IBaseEntity';

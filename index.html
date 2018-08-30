@@ -1,49 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
-    <!--<base href="./" />-->
+    <title></title>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.21.3/system.js" integrity="sha256-BpGtDbQ04vwkAquy4QnHHLU/ZW66NsCeVh0NFVte07s=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.21.3/system.src.js" integrity="sha256-aCXLfJl/ujrWdb03oGbfG4eiyzKsZT8okCrmbTArXVA=" crossorigin="anonymous"></script>
     <script>
         window.onload = function () {
-            //debugger;
-            //SystemJS.config({
-            //    transpiler: "plugin-typescript",
-            //    typescriptOptions: {
-            //        "target": "ES2015", // do not downlevel future ECMAScript syntax apart from decorators
-            //        "module": "commanjs" // transpile import and export statements, emitting as `System.register`
-            //    },
-            //    meta: {
-            //        "*.ts": {
-            //            "loader": "plugin-typescript"
-            //        }
-            //    }
-            //});
-
             SystemJS.config({
-                //transpiler: false,
                 //transpile:false,
-                //transpiler: "plugin-typescript",
-                "paths": {
-
-                },
                 baseURL: './',
-                map: {
-
-                    "ClassGenerator": './dist/src/ClassGenerator.js',
-                    "ISchema": './dist/src/ISchema.js',
-                    "Utils": './dist/src/Utils.js'
-
-                },
-                //meta: {
-                //    "*.ts": {
-                //        "loader": "plugin-typescript"
-                //    }
-                //}
+                packages: {
+                    'dist': {
+                        format: 'cjs',
+                        defaultExtension: 'js'
+                    }
+                }
             });
 
-            SystemJS.import('ClassGenerator').then(function (m) {
+            SystemJS.import('dist/main.web').then(function (m) {
                 document.getElementById('convert').addEventListener("click", convert)
                 function convert() {
                     let val = document.getElementById('input').value;
@@ -51,7 +25,7 @@
                         try {
 
                             var a = JSON.parse(val);
-                            document.getElementById('output').value = m.Generator.Generate(a);
+                            document.getElementById('output').value = m.generate(a);
                         }
                         catch (e) {
                             document.getElementById('output').value = JSON.stringify(e);

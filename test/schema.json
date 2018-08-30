@@ -12,14 +12,14 @@
       },
       {
         "name": "ManagerGUID",
-        "type": "object",
+        "type": "string",
         "object_name": "Manager",
         "object_type": "Employee",
         "is_fk": true
       },
       {
         "name": "DepartmentGUID",
-        "type": "object",
+        "type": "string",
         "object_name": "Department",
         "object_type": "Department",
         "is_fk": true
@@ -47,7 +47,7 @@
       },
       {
         "name": "HigherDepartmentGUID",
-        "type": "object",
+        "type": "string",
         "object_name": "HigherDepartment",
         "object_type": "Department",
         "is_fk": true
