@@ -37,7 +37,7 @@ export class Utils {
         return (Utils.isInteger(value) || Utils.isString(value)) && Object.keys.length > 0 && Object.is(value, enum_object[enum_object[value]]);
     }
 
-    static toInteger(value: any): Number | null {
+    static toInteger(value: any): number | null {
         return isNaN(value) ? null : Number(String(value).split('.')[0]);
     }
 

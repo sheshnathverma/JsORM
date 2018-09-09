@@ -8,7 +8,7 @@ export declare class Utils {
     static isDate(value: any): boolean;
     static isArray(value: any): boolean;
     static isEnum(value: any, enum_object: any): boolean;
-    static toInteger(value: any): Number | null;
+    static toInteger(value: any): number | null;
     static toDate(value: any): Date | null;
     static toEnumValue(value: any, enum_object: any): number;
     static toEnumString(value: any, enum_object: any): string;

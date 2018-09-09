@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>    
+    <title></title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.21.3/system.js" integrity="sha256-BpGtDbQ04vwkAquy4QnHHLU/ZW66NsCeVh0NFVte07s=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.21.3/system.src.js" integrity="sha256-aCXLfJl/ujrWdb03oGbfG4eiyzKsZT8okCrmbTArXVA=" crossorigin="anonymous"></script>
     <script>
@@ -19,35 +19,265 @@
 
             SystemJS.import('dist/main.web').then(function (m) {
                 document.getElementById('convert').addEventListener("click", convert)
+                document.getElementById('example').addEventListener("change", exampleChange)
+                document.getElementById('input').addEventListener("change", inputChange)
+
                 function convert() {
                     let val = document.getElementById('input').value;
                     if (val && val.trim()) {
                         try {
-
                             var a = JSON.parse(val);
                             document.getElementById('output').value = m.generate(a);
                         }
                         catch (e) {
-                            document.getElementById('output').value = JSON.stringify(e);
+                            document.getElementById('output').value = JSON.stringify(e, null, '  ');
                         }
-
                     }
                     else {
                         document.getElementById('output').value = "";
+                    }
+                }
 
+                function inputChange() {
+                    var val = JSON.stringify(JSON.parse(document.getElementById('input').value), null, '  ');
+                    if (val !== document.getElementById('input').value) {
+                        document.getElementById('input').value = val;
+                        convert();
+                    }
+                }
+
+                function exampleChange(event) {
+                    var id = document.getElementById('example').value;
+                    id = isNaN(id) ? 1 : Number(id);
+                    switch (id) {
+                        case 3: {
+                            document.getElementById('input').value = JSON.stringify(example3, null, '  ');
+                            convert();
+                        } break;
+                        case 2: {
+                            document.getElementById('input').value = JSON.stringify(example2, null, '  ');
+                            convert();
+                        } break;
+                        default: {
+                            document.getElementById('input').value = JSON.stringify(example1, null, '  ');
+                            convert();
+                        }
                     }
                 }
             });
         }
     </script>
+    <script>
+        var example1 = [
+            {
+                "name": "Employee",
+                "fields": [
+                    {
+                        "name": "Name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Salary",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Rating",
+                        "type": "number"
+                    },
+                    {
+                        "name": "DOB",
+                        "type": "date"
+                    },
+                    {
+                        "name": "IsActive",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "NickNames",
+                        "type": "array",
+                        "object_type": "string"
+                    },
+                    {
+                        "name": "OtherInfo",
+                        "type": "object"
+                    },
+                    {
+                        "name": "Gender",
+                        "type": "enum",
+                        "object_name": "",
+                        "object_type": "GenderType"
+                    }
+                ]
+            }
+        ];
+        var example2 = [
+            {
+                "name": "Employee",
+                "fields": [
+                    {
+                        "name": "Name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Salary",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Rating",
+                        "type": "number"
+                    },
+                    {
+                        "name": "DOB",
+                        "type": "date"
+                    },
+                    {
+                        "name": "IsActive",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "NickNames",
+                        "type": "array",
+                        "object_type": "string"
+                    },
+                    {
+                        "name": "OtherInfo",
+                        "type": "object"
+                    },
+                    {
+                        "name": "Gender",
+                        "type": "enum",
+                        "object_name": "",
+                        "object_type": "GenderType"
+                    },
+                    {
+                        "name": "ManagerGUID",
+                        "type": "object",
+                        "object_name": "Manager",
+                        "object_type": "Employee",
+                        "is_fk": true
+                    },
+                    {
+                        "name": "Clients",
+                        "type": "array",
+                        "object_type": "Employee",
+                        "is_fk": true
+                    }
+                ]
+            }
+        ];
+        var example3 = [
+            {
+                "name": "Employee",
+                "fields": [
+                    {
+                        "name": "Name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Salary",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Rating",
+                        "type": "number"
+                    },
+                    {
+                        "name": "DOB",
+                        "type": "date"
+                    },
+                    {
+                        "name": "IsActive",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "NickNames",
+                        "type": "array",
+                        "object_type": "string"
+                    },
+                    {
+                        "name": "OtherInfo",
+                        "type": "object"
+                    },
+                    {
+                        "name": "Gender",
+                        "type": "enum",
+                        "object_name": "",
+                        "object_type": "GenderType"
+                    },
+                    {
+                        "name": "ManagerGUID",
+                        "type": "object",
+                        "object_name": "Manager",
+                        "object_type": "Employee",
+                        "is_fk": true
+                    },
+                    {
+                        "name": "Clients",
+                        "type": "array",
+                        "object_type": "Employee",
+                        "is_fk": true
+                    },
+                    {
+                        "name": "DepartmentGUID",
+                        "type": "object",
+                        "object_name": "PrimaryDepartment",
+                        "object_type": "Department",
+                        "is_fk": true
+                    },
+                    {
+                        "name": "Departments",
+                        "type": "array",
+                        "object_type": "Department",
+                        "is_fk": true
+                    }
+                ]
+            },
+            {
+                "name": "Department",
+                "fields": [
+                    {
+                        "name": "Name",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Employees",
+                        "type": "array",
+                        "object_type": "Employee",
+                        "is_fk": true
+                    },
+                    {
+                        "name": "HigherDepartmentGUID",
+                        "type": "object",
+                        "object_name": "HigherDepartment",
+                        "object_type": "Department",
+                        "is_fk": true
+                    },
+                    {
+                        "name": "SubDepartments",
+                        "type": "array",
+                        "object_type": "Department",
+                        "is_fk": true
+                    }
+                ]
+            }
+        ];
+    </script>
 </head>
 <body>
-    <textarea id="input" style="width:100%;" rows="20"></textarea>
-    <hr />
-    <div style="text-align:center;">
-        <button type="button" id="convert">convert</button>
+    <div style="width:100%;height:50px; text-align:center;">
+        <select id="example">
+            <option>(select)</option>
+            <option value="1">Simple Employee</option>
+            <option value="2">Employee ref to other Employee type</option>
+            <option value="3">Employee ref to Department type</option>
+        </select>
+        <button type="button" id="convert">Generate</button>
     </div>
-    <hr />
-    <textarea id="output" style="width:100%;" rows="50"></textarea>
+    <div style="width:49%;display:inline-block;">
+        <textarea id="input" placeholder="input schema json string in this text box" style="width:100%;white-space:nowrap;height:calc(100vh - 80px);" rows="20"></textarea>
+    </div>
+    <div style="width:49%;margin:0 0 0 1%; display:inline-block;">
+        <textarea id="output" placeholder="generated class will be here" style="width:100%;white-space:nowrap;height:calc(100vh - 80px);" rows="50"></textarea>
+    </div>
 </body>
 </html>

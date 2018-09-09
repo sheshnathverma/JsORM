@@ -8,6 +8,8 @@ export declare class Generator {
         class: string;
     }[];
     static getImportDependancy(): string;
+    static getEnumDependancy(schema: ISchema): string[];
+    static getObjectDependancy(schema: ISchema): string[];
     private static getInterface(schema);
     private static getClass(schema);
     private static getEnum(schema);

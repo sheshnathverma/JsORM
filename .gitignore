@@ -3,3 +3,5 @@
 ################################################################################
 
 /node_modules/@types/node
+/test/schema1.json
+/test/schema2.json

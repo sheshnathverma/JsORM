@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\dist"
+    "\\src",
+    "\\src\\schema",
+    "\\src\\serializable",
+    "\\test"
   ],
-  "SelectedNode": "\\dist\\ClassGenerator.js",
+  "SelectedNode": "\\src\\schema\\FieldType.ts",
   "PreviewInSolutionExplorer": false
 }

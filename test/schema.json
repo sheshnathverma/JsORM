@@ -7,27 +7,60 @@
         "type": "string"
       },
       {
+        "name": "Salary",
+        "type": "integer"
+      },
+      {
+        "name": "Rating",
+        "type": "number"
+      },
+      {
         "name": "DOB",
         "type": "date"
       },
       {
-        "name": "ManagerGUID",
-        "type": "string",
-        "object_name": "Manager",
-        "object_type": "Employee",
-        "is_fk": true
+        "name": "IsActive",
+        "type": "boolean"
       },
       {
-        "name": "DepartmentGUID",
-        "type": "string",
-        "object_name": "Department",
-        "object_type": "Department",
+        "name": "NickNames",
+        "type": "array",
+        "object_type": "string"
+      },
+      {
+        "name": "OtherInfo",
+        "type": "object"
+      },
+      {
+        "name": "Gender",
+        "type": "enum",
+        "object_name": "",
+        "object_type": "GenderType"
+      },
+      {
+        "name": "ManagerGUID",
+        "type": "object",
+        "object_name": "Manager",
+        "object_type": "Employee",
         "is_fk": true
       },
       {
         "name": "Clients",
         "type": "array",
         "object_type": "Employee",
+        "is_fk": true
+      },
+      {
+        "name": "DepartmentGUID",
+        "type": "object",
+        "object_name": "PrimaryDepartment",
+        "object_type": "Department",
+        "is_fk": true
+      },
+      {
+        "name": "Departments",
+        "type": "array",
+        "object_type": "Department",
         "is_fk": true
       }
     ]
@@ -47,7 +80,7 @@
       },
       {
         "name": "HigherDepartmentGUID",
-        "type": "string",
+        "type": "object",
         "object_name": "HigherDepartment",
         "object_type": "Department",
         "is_fk": true

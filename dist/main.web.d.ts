@@ -1,1 +1,1 @@
-export declare function generate(data: any): string[];
+export declare function generate(data: any): string;
