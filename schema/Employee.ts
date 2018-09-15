@@ -1,5 +1,5 @@
 
-import { ISerializable, ASerializable, IBaseEntity, ABaseEntity, Utils } from '../src/index';
+import { ISerializable, ASerializable, IBaseEntity, ABaseEntity, Utils } from './core/index';
 import { GenderType } from './enum/index'
 import { Department } from "./Department"
 import { IEmployee } from "./base/Employee/IEmployee";

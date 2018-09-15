@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = require("./index");
 var fs = require('fs');
+var _path = require('path');
 var path = process.cwd();
 const pathInfo = require('path');
 fs.readFile(path + "\\test\\schema.json", 'utf8', (err, data) => {
@@ -23,9 +24,43 @@ fs.readFile(path + "\\test\\schema.json", 'utf8', (err, data) => {
             mkdirSync(pathInfo.join.apply(null, parts.slice(0, i)));
         }
     };
+    const copyRecursiveSync = function (src, dest) {
+        var exists = fs.existsSync(src);
+        var stats = exists && fs.statSync(src);
+        var isDirectory = exists && stats.isDirectory();
+        if (exists && isDirectory) {
+            mkdirpSync(dest);
+            fs.readdirSync(src).forEach(function (childItemName) {
+                copyRecursiveSync(_path.join(src, childItemName), _path.join(dest, childItemName));
+            });
+        }
+        else {
+            //fs.linkSync(src, dest);
+            fs.copyFileSync(src, dest);
+        }
+    };
     var _base_folder = (path + '\\schema');
+    var _core_folder = (_base_folder + '\\core');
     var _enum_folder = (_base_folder + '\\enum');
+    mkdirpSync(_core_folder);
     mkdirpSync(_enum_folder);
+    copyRecursiveSync(path + "\\src\\base", _core_folder + "\\base");
+    copyRecursiveSync(path + "\\src\\schema", _core_folder + "\\schema");
+    copyRecursiveSync(path + "\\src\\serializable", _core_folder + "\\serializable");
+    copyRecursiveSync(path + "\\src\\utils", _core_folder + "\\utils");
+    fs.writeFile(_core_folder + '\\index.ts', [
+        "./base/ABaseEntity",
+        "./base/IBaseEntity",
+        "./schema/FieldType",
+        "./schema/IField",
+        "./schema/ISchema",
+        "./serializable/ISerializable",
+        "./serializable/ASerializable",
+        "./utils/Utils",
+    ].map(e => `export * from '` + e + `';`).join('\n'), (err, data) => {
+        if (err)
+            console.log(err);
+    });
     data = JSON.parse(data);
     var result = index_1.Generator.Generate(data);
     var enums = [];

@@ -1,11 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src",
-    "\\src\\schema",
-    "\\src\\serializable",
     "\\test"
   ],
-  "SelectedNode": "\\src\\schema\\FieldType.ts",
+  "SelectedNode": "\\test\\schema.json",
   "PreviewInSolutionExplorer": false
 }

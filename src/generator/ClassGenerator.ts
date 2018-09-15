@@ -37,21 +37,23 @@ export class Generator {
     }
 
     public static getObjectDependancy(schema: ISchema) {
-        return schema
+        let classes: any[] = (schema
             .fields
             .filter((field: IField) => {
                 return field.is_fk;
             })
             .map((field: IField) => {
                 return field.object_type;
-            })
-            .filter((className, i, self) => {
-                return self.indexOf(className) === i
-            });
+            }));
+
+        classes.push(schema.extends);
+        return classes.filter((className, i, self) => {
+            return className && className.trim() && self.indexOf(className) === i
+        });
     }
 
     private static getInterface(schema: ISchema) {
-        return [Generator.getImportDependancy(), "//import { " + Generator.getEnumDependancy(schema).join(", ") + " } from '../../enum/index'"].join("\n") + `
+        return [Generator.getImportDependancy().replace('jsorm', '../../core/index'), "//import { " + Generator.getEnumDependancy(schema).join(", ") + " } from '../../enum/index'"].join("\n") + `
 /**
   * Auto generated interface for {0} class
   * It enum contains all fields exclude foreign key list object
@@ -82,7 +84,7 @@ export interface I{0} extends {1} {
     private static getClass(schema: ISchema) {
 
         const dependancies: any[] = [];
-        dependancies.push(Generator.getImportDependancy());
+        dependancies.push(Generator.getImportDependancy().replace('jsorm', './core/index'));
         dependancies.push("//import { " + Generator.getEnumDependancy(schema).join(", ") + " } from './enum/index'");
         Generator.getObjectDependancy(schema)
             .filter((className) => className !== schema.name)
@@ -173,7 +175,7 @@ export enum {0}Field {
 
     private static getBaseClass(schema: ISchema) {
         const dependancies: any[] = [];
-        dependancies.push(Generator.getImportDependancy());
+        dependancies.push(Generator.getImportDependancy().replace('jsorm', '../../core/index'));
         dependancies.push("//import { " + Generator.getEnumDependancy(schema).join(", ") + " } from '../../enum/index'");
         Generator.getObjectDependancy(schema)
             .map((className: string) => {
