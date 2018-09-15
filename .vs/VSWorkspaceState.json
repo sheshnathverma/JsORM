@@ -1,8 +1,17 @@
 {
   "ExpandedNodes": [
     "",
-    "\\test"
+    "\\schema",
+    "\\schema\\base",
+    "\\schema\\base\\Department",
+    "\\schema\\base\\Employee",
+    "\\schema\\core",
+    "\\schema\\core\\base",
+    "\\schema\\core\\schema",
+    "\\schema\\core\\serializable",
+    "\\schema\\core\\utils",
+    "\\schema\\enum"
   ],
-  "SelectedNode": "\\test\\schema.json",
+  "SelectedNode": "\\schema",
   "PreviewInSolutionExplorer": false
 }

@@ -1,0 +1,96 @@
+[
+  {
+    "name": "Employee",
+    "fields": [
+      {
+        "name": "Name",
+        "type": "string"
+      },
+      {
+        "name": "Salary",
+        "type": "integer"
+      },
+      {
+        "name": "Rating",
+        "type": "number"
+      },
+      {
+        "name": "DOB",
+        "type": "date"
+      },
+      {
+        "name": "IsActive",
+        "type": "boolean"
+      },
+      {
+        "name": "NickNames",
+        "type": "array",
+        "object_type": "string"
+      },
+      {
+        "name": "OtherInfo",
+        "type": "object"
+      },
+      {
+        "name": "Gender",
+        "type": "enum",
+        "object_name": "",
+        "object_type": "GenderType"
+      },
+      {
+        "name": "ManagerGUID",
+        "type": "object",
+        "object_name": "Manager",
+        "object_type": "Employee",
+        "is_fk": true
+      },
+      {
+        "name": "Clients",
+        "type": "array",
+        "object_type": "Employee",
+        "is_fk": true
+      },
+      {
+        "name": "DepartmentGUID",
+        "type": "object",
+        "object_name": "PrimaryDepartment",
+        "object_type": "Department",
+        "is_fk": true
+      },
+      {
+        "name": "Departments",
+        "type": "array",
+        "object_type": "Department",
+        "is_fk": true
+      }
+    ]
+  },
+  {
+    "name": "Department",
+    "fields": [
+      {
+        "name": "Name",
+        "type": "string"
+      },
+      {
+        "name": "Employees",
+        "type": "array",
+        "object_type": "Employee",
+        "is_fk": true
+      },
+      {
+        "name": "HigherDepartmentGUID",
+        "type": "object",
+        "object_name": "HigherDepartment",
+        "object_type": "Department",
+        "is_fk": true
+      },
+      {
+        "name": "SubDepartments",
+        "type": "array",
+        "object_type": "Department",
+        "is_fk": true
+      }
+    ]
+  }
+]
